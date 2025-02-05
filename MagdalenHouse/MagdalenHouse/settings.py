@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base',
     'magdalen_intranet',
+    'usuarios',
 ]
 
 MIDDLEWARE = [
