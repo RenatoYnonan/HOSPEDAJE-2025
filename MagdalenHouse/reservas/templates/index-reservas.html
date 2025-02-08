@@ -1,0 +1,32 @@
+{% extends 'index-intranet.html' %}
+{% block content %}
+
+
+<div class="row">
+    <div class="col-sm-7">
+        <h2>Nuevas Reservas</h2>
+        <p>Enter the reservation details below.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, ducimus temporibus ullam ut perferendis sit
+            eius
+            in reprehenderit incidunt debitis doloribus dolorem quia dolorum, rerum veniam harum similique inventore.
+            Repellendus.</p>
+    </div>
+    <div class="col-sm-5">
+        <h4>Existing Reservations</h4>
+        <p>Manage your current reservations.</p>
+        <div>
+            <input type="search" name="" id="" class="form-control" style="margin-bottom: 10px;">
+        </div>
+        <div>
+            {# Listado de Reservas #}
+            <div class="card text-bg-light mb-3" style="max-width: 100%;">
+                <div class="card-body">
+                  <h5 class="card-title">John Doe</h5>
+                  <p class="card-text">31/5/2023 - 2/6/2023</p>
+                </div>
+              </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

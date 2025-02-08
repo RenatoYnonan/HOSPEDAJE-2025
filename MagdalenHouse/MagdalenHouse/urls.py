@@ -21,4 +21,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(('base.urls', 'base'), namespace='base')),
     path('magdalen_intranet/', include(('magdalen_intranet.urls', 'magdalen_intranet'), namespace='magdalen_intranet')),
+    path('usuarios/', include(('usuarios.urls', 'usuarios'), namespace='usuarios')),
+    path('clientes/', include(('clientes.urls', 'clientes'), namespace='clientes')),
+    path('reservas/', include(('reservas.urls', 'reservas'), namespace='reservas')),
 ]
+
+

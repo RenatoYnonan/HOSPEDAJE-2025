@@ -1,0 +1,31 @@
+{% extends 'index-intranet.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center " style="margin-bottom: 20px;">
+    <h5>Listado de Grupos</h5>
+    <a href="{% url 'usuarios:crear-grupo' %}" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Agregar</a>
+</div>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Permisos</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in groups %}
+        <tr>
+            <th scope="row">1</th>
+            <td>{{i.name}}</td>
+            <td>{{i.permissions}}</td>
+            <td>
+                <a href="#" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

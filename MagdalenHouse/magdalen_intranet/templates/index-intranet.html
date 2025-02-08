@@ -11,6 +11,12 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+    {# Estilos de Fontawesome #}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -22,21 +28,18 @@
                 <ul class="list-unstyled components mb-5">
                     <li class="active">
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle">Home</a>
+                            class="dropdown-toggle">Reservas</a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
                             <li>
-                                <a href="#">Home 1</a>
+                                <a href="{% url 'reservas:index-calendar' %}">Calendario</a>
                             </li>
                             <li>
-                                <a href="#">Home 2</a>
-                            </li>
-                            <li>
-                                <a href="#">Home 3</a>
+                                <a href="{% url 'reservas:new-reserva' %}">Nueva Reserva</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">About</a>
+                        <a href="{% url 'clientes:index-clientes' %}">Clientes</a>
                     </li>
                     <li>
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
@@ -54,11 +57,18 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Portfolio</a>
+                        <a href="#pageUser" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">Usuarios</a>
+                        <ul class="collapse list-unstyled" id="pageUser">
+                            <li>
+                                <a href="{% url 'usuarios:index-usuarios' %}">Usuarios</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'usuarios:index-groups' %}">Grupos</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li>
-                        <a href="#">Usuarios</a>
-                    </li>
+
                 </ul>
 
                 <div class="footer">
@@ -94,18 +104,8 @@
                     </div>
                 </div>
             </nav>
-
-            <h2 class="mb-4">Sidebar #01</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.</p>
+            {# nota: Tablas y contenidos #}
+            {% block content %}{% endblock %}
         </div>
     </div>
 
