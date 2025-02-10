@@ -5,8 +5,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import *
 from .forms import *
 
-
-# Create your views here.
 # HABITACIONES
 class Habitaciones(ListView):
     model = Habitaciones
@@ -37,3 +35,28 @@ def DeleteHabitaciones(request, id):
 
 
 # DEPARTAMENTOS
+class Departamentos(ListView):
+    model = Departamentos
+    context_object_name = 'obj_alojamiento'
+    template_name = 'departamentos/index-departamentos.html'
+
+class CreateDepartamentos(CreateView):
+    model  = Departamentos
+    form_class  = DepartamentosForm
+    template_name = 'departamentos/index-departamentos-forms.html'
+    success_url = reverse_lazy('alojamiento:index-departamento')
+
+class UpdateDepartamentos(UpdateView):
+    model  = Departamentos
+    form_class  = DepartamentosForm
+    template_name = 'departamentos/index-departamentos-forms.html'
+    success_url = reverse_lazy('alojamiento:index-departamento')
+
+def DeleteDepartamentos(request, id):
+    departamento = get_object_or_404(id=id)
+    if request.method == 'POST':
+        if departamento.active_booking is  True:
+            departamento.active_booking = False
+            departamento.save() 
+            return redirect('alojamiento:index-departamento')
+    return render(request, 'departamentos/index-departamentos-forms.html')

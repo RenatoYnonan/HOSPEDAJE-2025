@@ -12,6 +12,9 @@ class ModelsClientes(models.Model):
     active_customer = models.BooleanField(verbose_name='Estado', default=True)
     date_create_customer = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creacion')
 
+    def __str__(self):
+        return f'{self.name_customer} {self.last_name_customer}'
+    
     class Meta:
         verbose_name = 'Cliente'
         verbose_name_plural = 'Clientes'
