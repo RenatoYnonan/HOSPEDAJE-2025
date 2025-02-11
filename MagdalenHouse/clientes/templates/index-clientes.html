@@ -1,33 +1,81 @@
-{% extends 'index-intranet.html' %}
-{% block content %}
-<div class="d-flex justify-content-between align-items-center " style="margin-bottom: 20px;">
-    <h5>Listado de Clientes</h5>
-    <a href="{% url 'clientes:crear-cliente' %}" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Agregar</a>
+{% extends 'index-intranet.html' %} {% block content %}
+<div
+  class="d-flex justify-content-between align-items-center"
+  style="margin-bottom: 20px"
+>
+  <h5>Listado de Clientes</h5>
+  <a
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+    class="btn btn-primary btn-sm"
+    ><i class="fa-solid fa-plus"></i> Agregar</a
+  >
 </div>
 
 <table class="table table-hover">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre Completo</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">Direccion</th>
-            <th scope="col">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for i in clientes %}
-        <tr>
-            <th scope="row">1</th>
-            <td>{{ i.name_customer }} {{i.last_name_customer}}</td>
-            <td>{{i.phone_customer}}</td>
-            <td>{{i.address_customer}}</td>
-            <td>
-                <a href="" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                <a href="" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre Completo</th>
+      <th scope="col">Telefono</th>
+      <th scope="col">Direccion</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in clientes %}
+    <tr>
+      <th scope="row">1</th>
+      <td>{{ i.name_customer }} {{i.last_name_customer}}</td>
+      <td>{{i.phone_customer}}</td>
+      <td>{{i.address_customer}}</td>
+      <td>
+        <a href="" class="btn btn-warning btn-sm"
+          ><i class="fa-solid fa-pen-to-square"></i
+        ></a>
+        <a href="" class="btn btn-danger btn-sm"
+          ><i class="fa-solid fa-trash"></i
+        ></a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <form action="." method="post">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          {% csrf_token %} {% for field in form.visible_fields %}
+          <label for="">{{ field.label }}</label>
+          {{ field }} {% endfor %}
+          <button class="btn btn-primary" type="submit">Guardar</button>
+          <a
+            href="{% url 'clientes:index-clientes' %}"
+            class="btn btn-secondary"
+            >Cancelar</a
+          >
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 {% endblock %}

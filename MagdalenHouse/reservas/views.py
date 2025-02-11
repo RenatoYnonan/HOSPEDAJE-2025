@@ -11,10 +11,21 @@ from django.http import JsonResponse
 class CalendarioView(TemplateView):
     template_name = 'index-calendario.html'
 
-class ReservasView(CreateView):
-    form_class = ReservaForm
+class ReservasView(TemplateView):
     template_name = 'index-reservas.html'
-    success_url = reverse_lazy('reservas:index-calendar')
 
-            
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] =  ReservaForm()
+        context['form_customer'] =  ClientesForm
+        return context
     
+    def post(self, request, *args, **kwargs):
+        form = ClientesForm(self.request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('reservas:new-reserva')
+        else:
+            context = self.get_context_data()
+            context['form_customer'] = form
+            return render(request, self.template_name, context)
