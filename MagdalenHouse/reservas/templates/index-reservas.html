@@ -6,8 +6,9 @@
     <div class="col-sm-7">
         <h2>Nuevas Reservas</h2>
         <p>Enter the reservation details below.</p>
-        <form action="" method="post">
+        <form action="{% url 'reservas:new-reserva' %}" method="post">
             {% csrf_token %}
+            <input type="hidden" name="form_type" value="reservation">
             <div class="d-flex column-gap">
                 {{ form.customer_selection }}
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myCustomerModal">
@@ -45,7 +46,8 @@
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
-  <form action="." method="post">
+  <form action="{% url 'reservas:new-reserva' %}" method="post">
+    <input type="hidden" name="form_type" value="customer">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
