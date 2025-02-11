@@ -23,7 +23,7 @@ urlpatterns = [
     path('magdalen_intranet/', include(('magdalen_intranet.urls', 'magdalen_intranet'), namespace='magdalen_intranet')),
     path('usuarios/', include(('usuarios.urls', 'usuarios'), namespace='usuarios')),
     path('clientes/', include(('clientes.urls', 'clientes'), namespace='clientes')),
-    path('reservas/', include(('reservas.urls', 'reservas'), namespace='reservas')),
+    path('mdreser/', include(('ReserApp.urls', 'ReserApp'), namespace='ReserApp')),
     path('alojamiento/', include(('alojamiento.urls', 'alojamiento'), namespace='alojamiento')),
 ]
 

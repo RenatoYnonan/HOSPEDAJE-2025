@@ -1,9 +1,8 @@
 from django.urls import path
-from .views import CalendarioView, ReservasView
-
+from .views import *
 
 urlpatterns = [
-    path('', CalendarioView.as_view(), name='index-calendar'),
     path('nueva-reserva', ReservasView.as_view(), name='new-reserva'),
     
 ]
+

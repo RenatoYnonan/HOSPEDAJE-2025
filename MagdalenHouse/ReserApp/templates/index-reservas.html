@@ -1,0 +1,75 @@
+{% extends 'index-intranet.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-sm-7">
+    <h2>Nuevas Reservas</h2>
+    <p>Enter the reservation details below.</p>
+    <form action="{% url 'ReserApp:new-reserva' %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="form_type" value="reservation">
+      <div class="d-flex column-gap">
+        {{ form.customer_selection }}
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myCustomerModal">
+          <i class="fa-solid fa-user-plus"></i>
+        </button>
+      </div>
+      <div>
+        {{ form.date_start.label }}
+        {{ form.date_start }}
+      </div>
+      <div>
+        {{ form.date_end.label }}
+        {{ form.date_end }}
+      </div>
+      <div>
+        {{ form.active_booking.label }}
+        {{ form.active_booking }}
+      </div>
+
+      <button class="btn btn-primary" type="submit">Guardar</button>
+      <a href="#" class="btn btn-secondary">Cancelar</a>
+    </form>
+  </div>
+  <div class="col-sm-5">
+    <h4>Existing Reservations</h4>
+    <p>Manage your current reservations.</p>
+    <div>
+      <input type="search" name="" id="" class="form-control" style="margin-bottom: 10px;">
+    </div>
+    <div>
+      {# Listado de Reservas #}
+      <div class="card text-bg-light mb-3" style="max-width: 100%;">
+        <div class="card-body">
+          <h5 class="card-title">John Doe</h5>
+          <p class="card-text">31/5/2023 - 2/6/2023</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="myCustomerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <form action="{% url 'ReserApp:new-reserva' %}" method="post">
+    <input type="hidden" name="form_type" value="customer">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {% csrf_token %} {% for field in form_customer.visible_fields %}
+          <label for="">{{ field.label }}</label>
+          {{ field }} {% endfor %}
+          <button class="btn btn-primary" type="submit">Guardar</button>
+          <a href="{% url 'ReserApp:new-reserva' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+{% endblock %}

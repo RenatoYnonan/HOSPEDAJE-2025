@@ -4,10 +4,10 @@ from django.views.generic import *
 from django.urls import reverse_lazy
 from .forms import ClientesForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+        
 # Create your views here.
 
-class ClientesView(LoginRequiredMixin, TemplateView):
+class ClientesView(LoginRequiredMixin, TemplateView):   
     template_name = 'index-clientes.html'
 
     def get_context_data(self, **kwargs):

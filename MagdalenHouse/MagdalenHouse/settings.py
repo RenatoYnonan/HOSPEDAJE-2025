@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'magdalen_intranet',
     'usuarios',
     'clientes',
-    'reservas',
-    'alojamiento'
+    'ReserApp',
+    'alojamiento',
 ]
 
 MIDDLEWARE = [
