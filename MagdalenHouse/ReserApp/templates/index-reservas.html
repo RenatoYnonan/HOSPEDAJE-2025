@@ -1,4 +1,5 @@
 {% extends 'index-intranet.html' %}
+{% load static %}
 {% block content %}
 <div class="row">
   <div class="col-sm-7">
@@ -34,16 +35,21 @@
     <h4>Existing Reservations</h4>
     <p>Manage your current reservations.</p>
     <div>
-      <input type="search" name="" id="" class="form-control" style="margin-bottom: 10px;">
+      <form action="" method="get">
+        <input type="search" name="search" id="" class="form-control" style="margin-bottom: 10px;">
+      </form>
     </div>
     <div>
       {# Listado de Reservas #}
+      {% for i in reservas %}
       <div class="card text-bg-light mb-3" style="max-width: 100%;">
         <div class="card-body">
-          <h5 class="card-title">John Doe</h5>
-          <p class="card-text">31/5/2023 - 2/6/2023</p>
+          <h5 class="card-title">{{ i.customer_selection }}</h5>
+          <p class="card-text">{{ i.date_start|date:'d-m-Y' }} - {{ i.date_end|date:'d-m-Y' }}</p>
+          <p class="span-bg-danger">{{ i.active_booking }}</p>
         </div>
       </div>
+      {% endfor %}
     </div>
   </div>
 

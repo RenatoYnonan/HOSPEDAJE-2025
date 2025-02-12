@@ -15,10 +15,13 @@ class ReservasView(View):
     template_name = 'index-reservas.html'
 
     def get(self, request, *args, **kwargs):
+        word =  request.GET.get('search')
         context = {
             'form': FormularioReserva(),
             'form_customer': ClientesForm(),
+            'reservas' :  ModelsReservas.objects.all()
         }
+        print(word)
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
@@ -41,4 +44,6 @@ class ReservasView(View):
             'form_customer': ClientesForm(),
         }
         return render(request, self.template_name, context)
+    
+
     

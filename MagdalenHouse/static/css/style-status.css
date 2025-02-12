@@ -1,0 +1,8 @@
+p.span-bg-danger{
+    background-color: #f44336;
+    width: min-content;
+    margin: 0px;
+    padding: 0px 10px;
+    border-radius: 20px;
+    font: 200 12px/20px 'poppins', sans-serif;
+}
