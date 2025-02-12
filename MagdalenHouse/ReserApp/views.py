@@ -1,4 +1,5 @@
 from webbrowser import get
+from django.db.models import query
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, CreateView, View
 from .models import ModelsReservas
@@ -15,13 +16,19 @@ class ReservasView(View):
     template_name = 'index-reservas.html'
 
     def get(self, request, *args, **kwargs):
-        word =  request.GET.get('search')
+        query =  request.GET.get('search')
+        if query:
+            reservas = ModelsReservas.objects.filter(customer_selection__name_customer__icontains=query)
+
+        else:
+            reservas = ModelsReservas.objects.all()
+
         context = {
             'form': FormularioReserva(),
             'form_customer': ClientesForm(),
-            'reservas' :  ModelsReservas.objects.all()
+            'reservas' :  reservas
         }
-        print(word)
+        print(query)
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
@@ -32,6 +39,8 @@ class ReservasView(View):
             if form.is_valid():
                 form.save()
                 return redirect('ReserApp:new-reserva')
+            else:
+                return JsonResponse(form.errors.as_json(), safe=False)
 
         elif form_type == "customer":
             form_customer = ClientesForm(request.POST)

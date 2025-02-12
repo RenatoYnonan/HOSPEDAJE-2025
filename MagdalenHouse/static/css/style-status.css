@@ -1,8 +1,26 @@
-p.span-bg-danger{
-    background-color: #f44336;
+:root{
+    --confirmar: #007BFF;
+    --pendiente: #FFC107;
+    --completado: #28A745;
+}
+
+p.bg-status{
     width: min-content;
     margin: 0px;
     padding: 0px 10px;
     border-radius: 20px;
     font: 200 12px/20px 'poppins', sans-serif;
+    color: white;
+}
+
+p.bg-cf{
+    background-color: var(--confirmar);
+}
+
+p.bg-pd{
+    background-color: var(--pendiente);
+}
+
+p.bg-cp{
+    background-color: var(--completado);
 }

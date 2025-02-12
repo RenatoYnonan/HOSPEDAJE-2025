@@ -3,8 +3,8 @@
 {% block content %}
 <div class="row">
   <div class="col-sm-7">
-    <h2>Nuevas Reservas</h2>
-    <p>Enter the reservation details below.</p>
+    <h2 class="mb-0">Nuevas Reservas</h2>
+    <p>Introduce los datos de la reserva a continuación.</p>
     <form action="{% url 'ReserApp:new-reserva' %}" method="post">
       {% csrf_token %}
       <input type="hidden" name="form_type" value="reservation">
@@ -14,15 +14,30 @@
           <i class="fa-solid fa-user-plus"></i>
         </button>
       </div>
-      <div>
-        {{ form.date_start.label }}
-        {{ form.date_start }}
+      <div class="mb-2">
+        {{ form.departamento_selection.label }}
+        {{ form.departamento_selection }}
       </div>
-      <div>
-        {{ form.date_end.label }}
-        {{ form.date_end }}
+
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          {{ form.date_start.label }}
+          {{ form.date_start }}
+        </div>
+        <div class="col-sm-6">
+          {{ form.date_end.label }}
+          {{ form.date_end }}
+        </div>
       </div>
-      <div>
+      <div class="mb-2">
+        {{ form.number_nights.label }}
+        {{ form.number_nights }}
+      </div>
+      <div class="mb-2">
+        {{ form.number_people.label }}
+        {{ form.number_people }}
+      </div>
+      <div class="mb-3">
         {{ form.active_booking.label }}
         {{ form.active_booking }}
       </div>
@@ -32,22 +47,34 @@
     </form>
   </div>
   <div class="col-sm-5">
-    <h4>Existing Reservations</h4>
-    <p>Manage your current reservations.</p>
-    <div>
+    <h4 class="mb-0">Reservas existentes</h4>
+    <p>Administra tus reservas actuales.</p>
+    <div class="">
+
       <form action="" method="get">
         <input type="search" name="search" id="" class="form-control" style="margin-bottom: 10px;">
       </form>
+
     </div>
+
     <div>
       {# Listado de Reservas #}
       {% for i in reservas %}
-      <div class="card text-bg-light mb-3" style="max-width: 100%;">
-        <div class="card-body">
-          <h5 class="card-title">{{ i.customer_selection }}</h5>
-          <p class="card-text">{{ i.date_start|date:'d-m-Y' }} - {{ i.date_end|date:'d-m-Y' }}</p>
-          <p class="span-bg-danger">{{ i.active_booking }}</p>
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="card-body col-md-8 px-5">
+            <h6 class="card-title mb-1">{{ i.customer_selection }}</h6>
+            <p class="card-text mb-1">{{ i.date_start|date:'d-m-Y' }} - {{ i.date_end|date:'d-m-Y' }}</p>
+            <p
+              class="bg-status {% if i.active_booking == 'confirmada' %} bg-cf {% elif i.active_booking == 'pendiente' %} bg-pd {% elif i.active_booking == 'completada' %} bg-cp {% endif %} ">
+              {{ i.active_booking }}</p>
+          </div>
+
+          <div class="col-md-4 text-center align-self-center">
+            <a href="" class="btn btn-dark"><i class="fa-solid fa-eye"></i></a>
+          </div>
         </div>
+
       </div>
       {% endfor %}
     </div>
@@ -75,6 +102,28 @@
     </div>
   </form>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function calcularNoches() {
+      let dateStart = document.querySelector("#id_date_start").value;
+      let dateEnd = document.querySelector("#id_date_end").value;
+      let numberNightsInput = document.querySelector("#id_number_nights");
+
+      if (dateStart && dateEnd) {
+        let start = new Date(dateStart);
+        let end = new Date(dateEnd);
+        let diff = Math.ceil((end - start) / (1000 * 60 * 60 * 24));  // Diferencia en días
+
+        numberNightsInput.value = diff > 0 ? diff : 0;
+      }
+    }
+
+    // Asegurarse de que los eventos se disparen correctamente
+    document.querySelector("#id_date_start").addEventListener("change", calcularNoches);
+    document.querySelector("#id_date_end").addEventListener("change", calcularNoches);
+  });
+</script>
 
 
 
