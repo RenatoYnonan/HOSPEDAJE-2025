@@ -2,7 +2,7 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center " style="margin-bottom: 20px;">
     <h5>Listado de Departamentos</h5>
-    <a href="" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Agregar</a>
+    <a href="{% url 'alojamiento:create-departamento' %}" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Agregar</a>
 </div>
 
 <table class="table table-hover">
@@ -23,9 +23,10 @@
             <td>{{ i.name_booking }}</td>
             <td>{{i.price_night}}</td>
             <td>{{i.capacity_booking}}</td>
+            <td>{% if i.active_booking %} Activo {% else %} Inactivo {% endif %}  </td>
             <td>
-                <a href="" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                <a href="" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+                <a href="{% url 'alojamiento:update-departamento' i.id %}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href="{% url 'alojamiento:delete-departamento' i.id %}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
             </td>
         </tr>
         {% endfor %}

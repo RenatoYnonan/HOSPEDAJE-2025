@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect ,get_object_or_404
+from django.shortcuts import render,redirect, get_object_or_404
 from django.views.generic import *
 from django.urls import reverse_lazy
+from django.http  import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import *
 from .forms import *
@@ -23,19 +24,11 @@ class UpdateHabitaciones(UpdateView):
     template_name = 'habitaciones/index-habitaciones-forms.html'
     success_url = reverse_lazy('alojamiento:index-habitacion')
 
-def DeleteHabitaciones(request, id):
-    habitacion = get_object_or_404(id=id)
-    if request.method == 'POST':
-        if habitacion.active_booking is  True:
-            habitacion.active_booking = False
-            habitacion.save()
-            return redirect('alojamiento:index-habitacion')
-    return render(request, 'habitaciones/index-habitaciones-forms.html')
 
 
 
 # DEPARTAMENTOS
-class Departamentos(ListView):
+class DepartamentosView(ListView):
     model = Departamentos
     context_object_name = 'obj_alojamiento'
     template_name = 'departamentos/index-departamentos.html'
@@ -52,11 +45,15 @@ class UpdateDepartamentos(UpdateView):
     template_name = 'departamentos/index-departamentos-forms.html'
     success_url = reverse_lazy('alojamiento:index-departamento')
 
-def DeleteDepartamentos(request, id):
-    departamento = get_object_or_404(id=id)
+
+
+def DeleteDepartament(request,id):
+    dp = get_object_or_404(Departamentos, id=id)
     if request.method == 'POST':
-        if departamento.active_booking is  True:
-            departamento.active_booking = False
-            departamento.save() 
+        if dp.active_booking:
+            dp.active_booking = False
+            dp.save()
             return redirect('alojamiento:index-departamento')
+        else:
+            return JsonResponse({'error': 'El usuario ya está inactivo'})
     return render(request, 'departamentos/index-departamentos-forms.html')

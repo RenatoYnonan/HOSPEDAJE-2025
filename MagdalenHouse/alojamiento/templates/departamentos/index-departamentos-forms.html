@@ -1,0 +1,9 @@
+{% extends 'index-intranet.html' %} 
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit">Guardar</button>
+    <a href="{% url 'alojamiento:index-departamento' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
