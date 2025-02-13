@@ -1,7 +1,7 @@
 from webbrowser import get
 from django.db.models import query
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, CreateView, View
+from django.views.generic import *
 from .models import ModelsReservas
 
 from clientes.forms import ClientesForm
@@ -56,3 +56,8 @@ class ReservasView(View):
     
 
     
+class ReservaUpdate(UpdateView):
+    model = ModelsReservas
+    form_class =  FormularioReserva
+    template_name = 'index-reservas-form.html'
+    success_url = reverse_lazy('ReserApp:new-reserva')

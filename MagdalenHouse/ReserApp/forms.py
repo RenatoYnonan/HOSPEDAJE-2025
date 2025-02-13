@@ -8,9 +8,9 @@ class FormularioReserva(forms.ModelForm):
         model = ModelsReservas
         fields = '__all__'
         widgets = {
-            'date_start' : forms.DateInput(attrs={'type': 'date'}),
+            'date_start' : forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'date_end' : forms.DateInput(attrs={'type': 'date'}),
-            'number_nights' : forms.DateInput(attrs={'readonly': 'readonly'}),
+            'number_nights' : forms.NumberInput(attrs={'readonly': 'readonly'}),
         }
 
     def __init__(self, *args, **kwargs):
