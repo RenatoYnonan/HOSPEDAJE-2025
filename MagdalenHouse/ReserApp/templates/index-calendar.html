@@ -1,0 +1,27 @@
+{% extends 'index-intranet.html' %}
+
+{% block content %}
+<div id="calendar"></div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'es',  // Configura el idioma
+            events: '/mdreser/reservas/',
+            eventClick: function(info){
+                window.location.href = '/mdreser/edit-reserva/' + info.event.id + '/';
+            },  // URL de la vista que retorna los eventos
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            // Puedes agregar más opciones de configuración según tus necesidades
+        });
+
+        calendar.render();
+    });
+</script>
+{% endblock %}

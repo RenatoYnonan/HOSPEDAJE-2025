@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'clientes',
     'ReserApp',
     'alojamiento',
+    'temporadas',
 ]
 
 MIDDLEWARE = [

@@ -1,4 +1,5 @@
 from webbrowser import get
+from django import template
 from django.db.models import query
 from django.shortcuts import render, redirect
 from django.views.generic import *
@@ -11,7 +12,27 @@ from django.http import JsonResponse
 
 # Create your views here.
 
+#CALENDARIO
 
+class CalendarioView(TemplateView):
+    template_name = 'index-calendar.html'
+
+def ObtenerReservas(request):
+    reservas = ModelsReservas.objects.all()
+    eventos = []
+    
+    for i in reservas:
+        eventos.append({
+            'id': i.pk,  # ID único de la reserva
+            'title': i.customer_selection.name_customer, #Nombre del cliente
+            'start': i.date_start.isoformat(), #Fecha de inicio donde reservo
+            'end': i.date_end.isoformat() #Fecha de fin donde reservo
+        })
+    
+    return JsonResponse(eventos, safe=False)
+
+
+#RESERVAS
 class ReservasView(View):
     template_name = 'index-reservas.html'
 
