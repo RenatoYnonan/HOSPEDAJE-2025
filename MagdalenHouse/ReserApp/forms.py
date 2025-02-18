@@ -15,7 +15,8 @@ class FormularioReserva(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
+        self.fields['customer_selection'].queryset = ModelsClientes.objects.filter(active_customer=True)
+
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
 

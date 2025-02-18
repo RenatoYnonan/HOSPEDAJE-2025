@@ -59,9 +59,10 @@ class ReservasView(View):
             if form.is_valid():
                 start_date = form.cleaned_data['date_start']
                 end_date = form.cleaned_data['date_end']
+                departemento_id = form.cleaned_data['departamento_selection'].id
 
                 # 📌 Verificar disponibilidad antes de guardar
-                if not self.check_availability(start_date, end_date):
+                if not self.check_availability(start_date, end_date, departemento_id):
                     return JsonResponse({'available': False, 'message': 'Fechas no disponibles'}, status=400)
 
                 form.save()
@@ -82,7 +83,7 @@ class ReservasView(View):
         return render(request, self.template_name, context)
 
     @staticmethod
-    def check_availability(start_date, end_date):
+    def check_availability(start_date, end_date, departamento_id):
         """
         Verifica si las fechas están disponibles. Retorna True si están disponibles, False si hay conflicto.
         """
@@ -95,7 +96,9 @@ class ReservasView(View):
 
         # 📌 Verificar si hay conflictos con reservas existentes
         conflicts = ModelsReservas.objects.filter(
-            date_start__lte=end_date, date_end__gte=start_date
+            date_start__lte=end_date, 
+            date_end__gte=start_date,
+            departamento_selection_id=departamento_id,
         ).exists()
 
         # 📌 Verificar si hay una temporada disponible
@@ -109,7 +112,13 @@ class ReservasView(View):
 class ListReservas(ListView):
     model = ModelsReservas
     template_name = 'index-historial-reservas.html'
-    context_object_name = 'list-reservas'    
+    context_object_name = 'reservar'
+
+class DetailReservas(DetailView):
+    model = ModelsReservas
+    template_name = ''
+
+
 
 class ReservaUpdate(UpdateView):
     model = ModelsReservas
