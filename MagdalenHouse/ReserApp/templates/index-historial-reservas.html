@@ -2,7 +2,7 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center " style="margin-bottom: 20px;">
     <h5>Historial de Reservas</h5>
-    <a href="#" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Agregar</a>
+    <a href="{% url 'ReserApp:new-reserva' %}" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Agregar</a>
 </div>
 
 <table class="table table-hover">
@@ -18,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for i in reservar %}
+        {% for i in page_obj %}
         <tr>
             <th scope="row">{{i.id}}</th>
             <td>{{i.customer_selection}}</td>
@@ -27,11 +27,41 @@
             <td>{{i.date_end}}</td>
             <td>{{i.active_booking}}</td>
             <td>
-                <a href="{% url 'ReserApp:edit-reserva' i.id %}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href="{% url 'ReserApp:edit-reserva' i.id %}" class="btn btn-warning btn-sm"><i
+                        class="fa-solid fa-pen-to-square"></i></a>
                 <a href="#" class="btn btn-dark btn-sm"><i class="fa-solid fa-eye"></i></a>
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+<div class="pagination d-flex justify-content-center mt-4">
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page=1">Primero</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+        </li>
+        {% endif %}
+
+        <li class="page-item active">
+            <span class="page-link">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+        </li>
+
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Ultimo</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+
 {% endblock %}

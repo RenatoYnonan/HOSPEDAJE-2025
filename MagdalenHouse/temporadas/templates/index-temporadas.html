@@ -1,0 +1,33 @@
+{% extends 'index-intranet.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center " style="margin-bottom: 20px;">
+    <h5>Listado de Temporadas</h5>
+    <a href="{% url 'temporadas:create-temporada' %}" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Agregar</a>
+</div>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha de Inicio - Fin</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in temporadas %}
+        <tr>
+            <th scope="row">1</th>
+            <td>{{i.nombre_temporada}}</td>
+            <td>{{i.fecha_inicio}} - {{i.fecha_final}} </td>
+            <td>{% if i.estado %} Activo {% else %} Inactivo {% endif %} </td>
+            <td>
+                <a href="{% url 'temporadas:edit-temporada' i.pk %}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href="{% url 'temporadas:delete-temporada' i.pk %}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

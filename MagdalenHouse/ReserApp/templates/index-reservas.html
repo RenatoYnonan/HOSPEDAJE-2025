@@ -2,9 +2,9 @@
 {% block content %}
 <div class="row">
   <div class="col-sm-7">
-    <h2 class="mb-0">Nuevas Reservas</h2>
+    <h4 class="mb-0">Nuevas Reservas</h4>
     <p>Introduce los datos de la reserva a continuación.</p>
-    <form action="{% url 'ReserApp:new-reserva' %}" method="post">
+    <form id="id_form" action="{% url 'ReserApp:new-reserva' %}" method="post">
       {% csrf_token %}
       <input type="hidden" name="form_type" value="reservation">
       <div class="d-flex column-gap">
@@ -42,7 +42,7 @@
       </div>
 
       <button class="btn btn-primary" type="submit">Guardar</button>
-      <a href="#" class="btn btn-secondary">Cancelar</a>
+      <a href="" onclick="document.getElementById('id_form').reset()" class="btn btn-secondary">Cancelar</a>
     </form>
   </div>
   <div class="col-sm-5">

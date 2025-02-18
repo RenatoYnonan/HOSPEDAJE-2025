@@ -113,6 +113,7 @@ class ListReservas(ListView):
     model = ModelsReservas
     template_name = 'index-historial-reservas.html'
     context_object_name = 'reservar'
+    paginate_by = 5
 
 class DetailReservas(DetailView):
     model = ModelsReservas
