@@ -14,23 +14,26 @@
         </button>
       </div>
       <div class="mb-2">
+        {{ form.costo_limpieza }}
+      </div>
+      <div class="mb-2">
         {{ form.departamento_selection.label }}
         {{ form.departamento_selection }}
       </div>
 
       <div class="row mb-2">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
           {{ form.date_start.label }}
           {{ form.date_start }}
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
           {{ form.date_end.label }}
           {{ form.date_end }}
         </div>
-      </div>
-      <div class="mb-2">
-        {{ form.number_nights.label }}
-        {{ form.number_nights }}
+        <div class="col-sm-4 mb-2">
+          {{ form.number_nights.label }}
+          {{ form.number_nights }}
+        </div>
       </div>
       <div class="mb-2">
         {{ form.number_people.label }}
@@ -39,6 +42,10 @@
       <div class="mb-3">
         {{ form.active_booking.label }}
         {{ form.active_booking }}
+      </div>
+      <div class="mb-3">
+        {{ form.price_total.label }}
+        {{ form.price_total }}
       </div>
 
       <button class="btn btn-primary" type="submit">Guardar</button>
@@ -63,7 +70,8 @@
 
           <div class="col-md-5 text-center align-self-center">
             <a href="#" class="btn btn-dark"><i class="fa-solid fa-eye"></i></a>
-            <a href="{% url 'ReserApp:edit-reserva' i.id %}" class="btn btn-dark"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a href="{% url 'ReserApp:edit-reserva' i.id %}" class="btn btn-dark"><i
+                class="fa-solid fa-pen-to-square"></i></a>
           </div>
         </div>
 
@@ -97,10 +105,17 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    let dateStartInput = document.querySelector("#id_date_start");
+    let dateEndInput = document.querySelector("#id_date_end");
+    let numberNightsInput = document.querySelector("#id_number_nights");
+    let departamentoSelect = document.querySelector("#id_departamento_selection");
+    let precioTotalInput = document.querySelector("#id_price_total");
+    let precioServices = document.querySelector("#id_costo_limpieza");
+    let precioPorNoche = 0;  // Precio dinámico
+
     function calcularNoches() {
-      let dateStart = document.querySelector("#id_date_start").value;
-      let dateEnd = document.querySelector("#id_date_end").value;
-      let numberNightsInput = document.querySelector("#id_number_nights");
+      let dateStart = dateStartInput.value;
+      let dateEnd = dateEndInput.value;
 
       if (dateStart && dateEnd) {
         let start = new Date(dateStart);
@@ -108,14 +123,46 @@
         let diff = Math.ceil((end - start) / (1000 * 60 * 60 * 24));  // Diferencia en días
 
         numberNightsInput.value = diff > 0 ? diff : 0;
+        calcularPrecioTotal();
       }
     }
 
-    // Asegurarse de que los eventos se disparen correctamente
-    document.querySelector("#id_date_start").addEventListener("change", calcularNoches);
-    document.querySelector("#id_date_end").addEventListener("change", calcularNoches);
+    function calcularPrecioTotal() {
+      let number_nights = parseInt(numberNightsInput.value) || 0;
+      precioTotalInput.value = (number_nights * precioPorNoche) + 50;
+    }
+
+    function obtenerPrecioDepartamento(departamentoId) {
+      if (!departamentoId) {
+        precioPorNoche = 0;
+        calcularPrecioTotal();
+        return;
+      }
+
+      fetch(`/mdreser/get-precio-departamento/?departamento_id=${departamentoId}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.precio_noche) {
+            precioPorNoche = parseFloat(data.precio_noche);
+            calcularPrecioTotal();
+          } else {
+            precioPorNoche = 0;
+            precioTotalInput.value = "Error";
+          }
+        })
+        .catch(error => console.error("Error al obtener el precio:", error));
+    }
+
+    // Eventos
+    dateStartInput.addEventListener("change", calcularNoches);
+    dateEndInput.addEventListener("change", calcularNoches);
+    numberNightsInput.addEventListener("input", calcularPrecioTotal);
+    departamentoSelect.addEventListener("change", function () {
+      obtenerPrecioDepartamento(this.value);
+    });
   });
 </script>
+
 
 
 

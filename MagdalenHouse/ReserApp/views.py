@@ -107,7 +107,16 @@ class ReservasView(View):
         ).exists()
 
         # 📌 Si hay conflicto o no hay temporada válida, retornar False
-        return not conflicts and temporada_existente  
+        return not conflicts and temporada_existente
+
+def get_precio_departamento(request):
+    departamento_id = request.GET.get('departamento_id')
+    
+    try:
+        departamento = Departamentos.objects.get(id=departamento_id)
+        return JsonResponse({'precio_noche': departamento.price_night})
+    except Departamentos.DoesNotExist:
+        return JsonResponse({'error': 'Departamento no encontrado'}, status=404)  
 
 class ListReservas(ListView):
     model = ModelsReservas

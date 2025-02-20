@@ -9,5 +9,6 @@ urlpatterns = [
 
     #Reservas
     path('nueva-reserva', ReservasView.as_view(), name='new-reserva'),
-    path('edit-reserva/<int:pk>/', ReservaUpdate.as_view(), name='edit-reserva')
+    path('edit-reserva/<int:pk>/', ReservaUpdate.as_view(), name='edit-reserva'),
+    path('get-precio-departamento/', get_precio_departamento, name='get-precio-departamento'),
 ]
