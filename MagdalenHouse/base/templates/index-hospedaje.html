@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <nav>
+        <img src="{% static 'images/Logo-Lima.webp' %}" alt="" height="80px">
+
+        <ul>
+            <li><a href="">Ofertas</a></li>
+            <li><a href="">Lima</a></li>
+            <li><a href="">Tarapoto</a></li>
+            <li><a href="">Guía Turística</a></li>
+            <li><a href="">Atención Agencias</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        {% block content-pp %}
+        {% include 'index-portada.html' %}
+        {% include 'index-list-h-d.html' %}
+        {% include 'index-carrusel.html' %}
+        {% include 'index-servicios.html' %}
+        {% include 'index-sedes.html' %}
+        {% include 'index-review.html' %}
+        {% endblock %}
+    </div>
+
+    {% block content-hospedaje %}
+
+    {% endblock %}
+</body>
+</html>
