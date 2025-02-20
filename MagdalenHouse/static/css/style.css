@@ -8291,3 +8291,16 @@ a[data-toggle="collapse"] {
 
 .footer p {
   color: rgba(255, 255, 255, 0.5); }
+
+
+/* GRID */
+.grid-col-3{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  }
+
+.grid-background{
+  background-color: red;
+
+}
