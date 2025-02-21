@@ -3,7 +3,8 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -16,31 +17,40 @@
 </head>
 
 <body>
-    <nav>
-        <img src="{% static 'images/Logo-Lima.webp' %}" alt="" height="80px">
+    <nav class="p-2 bg-warning position-relative" style="z-index: 99999;">
+        <div class="container d-flex justify-content-between align-items-center">
+            <img src="{% static 'images/Logo-Lima.webp' %}" alt="" height="80px">
 
-        <ul>
-            <li><a href="">Ofertas</a></li>
-            <li><a href="">Lima</a></li>
-            <li><a href="">Tarapoto</a></li>
-            <li><a href="">Guía Turística</a></li>
-            <li><a href="">Atención Agencias</a></li>
-        </ul>
+            <ul class="d-flex justify-content-between align-items-center list-unstyled m-0 gap-2-c">
+                <li><a href="" class="font-w-nav">Ofertas</a></li>
+                <li><a href="" class="font-w-nav">Lima</a></li>
+                <li><a href="" class="font-w-nav">Tarapoto</a></li>
+                <li><a href="" class="font-w-nav">Guía Turística</a></li>
+                <li><a href="" class="font-w-nav">Atención Agencias</a></li>
+            </ul>
+
+        </div>
     </nav>
+
+    {% block content-pp %}
+    <div class="bg-img-hospedaje">
+        <div class="container" style="z-index: 99999;">
+            {% include 'index-portada.html' %}
+        </div>
+    </div>
     <div class="container">
-        {% block content-pp %}
-        {% include 'index-portada.html' %}
         {% include 'index-list-h-d.html' %}
         {% include 'index-carrusel.html' %}
         {% include 'index-servicios.html' %}
         {% include 'index-sedes.html' %}
         {% include 'index-review.html' %}
-        {% endblock %}
+    </div>
+    {% endblock %}
+
+    <div class="container">
+        {% block content-hospedaje %}{% endblock %}
     </div>
 
-    {% block content-hospedaje %}
-
-    {% endblock %}
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

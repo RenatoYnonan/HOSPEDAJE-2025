@@ -1,0 +1,40 @@
+{% extends 'index-hospedaje.html' %}
+{% block content-hospedaje %}
+<div class="row pt-3">
+    <div class="col-6">
+        <p class="m-0">DEPARTAMENTOS EN TARAPOTO</p>
+        <h2>{{ alojamiento.name_booking }}</h2>
+        <div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, dolorum earum. Nisi in quae dolorum nihil
+                quibusdam delectus recusandae iusto mollitia modi voluptates commodi qui, facere cupiditate harum quidem
+                reiciendis?</p>
+        </div>
+        {# nota: ameneties #}
+        <div>
+            <h4>Ameneties</h4>
+            <div class="row">
+                <div class="col-6">
+                    <ul class="list-unstyled">
+                        <li><i class="fa-solid fa-wifi"></i> Wifi Internet </li>
+                        <li><i class="fa-solid fa-bath"></i> Baño Privado</li>
+                        <li><i class="fa-solid fa-wind"></i> Toallas</li>
+                    </ul>
+                </div>
+                <div class="col-6">
+                    <ul class="list-unstyled">
+                        <li><i class="fa-solid fa-tv"></i> LED TV 55" + Netflix</li>
+                        <li><i class="fa-solid fa-wind"></i> Aire Acondicionado</li>
+                        <li><i class="fa-solid fa-wind"></i> Refrigeradora</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <button class="btn btn-primary w-100 ">RESERVAR</button>
+    </div>
+    <div class="col-6 d-flex justify-content-center align-items-center">
+        <img src="https://placehold.co/600x400" class="card-img-top" alt="...">
+    </div>
+</div>
+{% endblock %}
+{% block content-pp %} {% endblock %}
