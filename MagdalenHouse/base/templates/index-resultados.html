@@ -1,0 +1,32 @@
+{% extends 'index-hospedaje.html' %}
+{% block content-hospedaje %}
+<h2 class="text-center m-2">Resultados de la busqueda</h2>
+{% for i in departamentos %}
+<div class="card mb-3" style="width: 90%;" >
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="https://placehold.co/600x500" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{ i.name_booking }}</h5>
+                <span><i class="fa-regular fa-user"></i> Hasta {{ i.capacity_booking }} personas</span>
+                <div>
+                   <a href="" class="btn btn-warning rounded-pill"> <i class="fa-solid fa-wifi "></i> Wifi</a>
+                    <a href="" class="btn btn-warning rounded-pill"> <i class="fa-solid fa-shower "></i> Ducha</a>
+                    <a href="" class="btn btn-warning rounded-pill"> <i class="fa-solid fa-wind "></i> Aire acondicionado</a>
+                    <a href="" class="btn btn-warning rounded-pill"> <i class="fa-solid fa-tv "></i> Netflix</a>
+                </div>
+                <p class="card-text">{{ i.description_booking }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="m-0">S/. {{ i.price_night }}</p>
+                    <a href="{% url 'base:detail-habitacion' i.id %}" class="btn btn-outline-warning">Reservar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
+
+{% block content-pp %}{% endblock %}

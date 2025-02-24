@@ -1,15 +1,15 @@
 <h1 class="text-center">Hospedaje Magdalen House</h1>
 <div class="bg-light p-4 rounded-pill">
-    <form action="" method="get">
+    <form action="{% url 'base:resultados' %}" method="get">
         <div class="d-flex justify-content-center align-items-end">
             <div class="d-flex w-80">
                 <div>
                     <label for="">Check-in </label>
-                    <input class="form-control" type="date" name="" id="">
+                    <input class="form-control" type="date" name="Check-entrada" id="">
                 </div>
                 <div>
                     <label for="">Check-out</label>
-                    <input class="form-control" type="date" name="" id="">
+                    <input class="form-control" type="date" name="Check-salida" id="">
                 </div>
                 <div>
                     <label for="">Ubicación</label>
