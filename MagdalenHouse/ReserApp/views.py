@@ -13,6 +13,7 @@ from django.urls import reverse_lazy
 from django.http import JsonResponse
 from datetime import date
 
+
 from django.utils import timezone
 
 
@@ -36,7 +37,6 @@ def ObtenerReservas(request):
         })
     
     return JsonResponse(eventos, safe=False)
-
 
 #RESERVAS
 class ReservasView(View):

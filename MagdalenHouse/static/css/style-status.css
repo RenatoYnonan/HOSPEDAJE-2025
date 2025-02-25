@@ -1,10 +1,10 @@
-:root{
+:root {
     --confirmar: #007BFF;
     --pendiente: #FFC107;
     --completado: #28A745;
 }
 
-p.bg-status{
+p.bg-status {
     width: min-content;
     margin: 0px;
     padding: 0px 10px;
@@ -13,14 +13,15 @@ p.bg-status{
     color: white;
 }
 
-p.bg-cf{
+p.bg-cf {
     background-color: var(--confirmar);
 }
 
-p.bg-pd{
+p.bg-pd {
     background-color: var(--pendiente);
 }
 
-p.bg-cp{
+p.bg-cp {
     background-color: var(--completado);
 }
+

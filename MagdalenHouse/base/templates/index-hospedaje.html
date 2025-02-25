@@ -14,6 +14,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css" />
 </head>
 
 <body>
@@ -51,6 +58,66 @@
         {% block content-hospedaje %}{% endblock %}
     </div>
 
+    <footer class="bg-warning w-100">
+        <div class="border-bottom p-3 ">
+            <div class="container d-flex justify-content-between">
+                <img src="{% static 'images/Logo-Lima.webp' %}" alt="" height="80px">
+                <div class="d-flex align-items-center">
+                    <p class="m-0 text-light">Tarapoto:</p>
+                    <a href="" class="btn btn-light"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="" class="btn btn-light"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="" class="btn btn-light"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+                <div class="d-flex align-items-center">
+                    <p class="m-0 text-light">Lima:</p>
+                    <a href="" class="btn btn-light"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="" class="btn btn-light"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="" class="btn btn-light"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+                <div class="d-flex align-items-center">
+                    <p class="m-0 text-light">Metodos de Pagos :</p>
+                    <a href="" class="btn btn-light"><i class="fa-brands fa-cc-visa"></i></a>
+                    <a href="" class="btn btn-light"><i class="fa-solid fa-credit-card"></i></a>
+                    <a href="" class="btn btn-light"><i class="fa-brands fa-cc-amex"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="d-flex justify-content-between pt-4 pb-4">
+                <div>
+                    <h6>Hospedaje Magdalen House</h6>
+                    <ul class="list-unstyled lh-lg" style="line-height: 2rem;">
+                        <li><a href="" class="text-light">Inicio</a></li>
+                        <li><a href="" class="text-light">Guía Turística</a></li>
+                        <li><a href="" class="text-light">Alquiler de Habitaciones</a></li>
+                        <li><a href="" class="text-light">Alquiler de Departamentos</a></li>
+                        <li><a href="" class="text-light">Hospedaje en Magdalena del Mar</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6>Hospedaje Magdalen Tarapoto</h6>
+                    <ul class="list-unstyled" style="line-height: 2rem;">
+                        <li><a href="" class="text-light">Inicio</a></li>
+                        <li><a href="" class="text-light">Guía Turística</a></li>
+                        <li><a href="" class="text-light">Alquiler de Habitaciones</a></li>
+                        <li><a href="" class="text-light">Alquiler de Departamentos</a></li>
+                        <li><a href="" class="text-light">Hospedaje en Magdalena del Mar</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6>Hospedaje Magdalen Lima</h6>
+                    <ul class="list-unstyled" style="line-height: 2rem;">
+                        <li><a href="" class="text-light">Inicio</a></li>
+                        <li><a href="" class="text-light">Guía Turística</a></li>
+                        <li><a href="" class="text-light">Alquiler de Habitaciones</a></li>
+                        <li><a href="" class="text-light">Alquiler de Departamentos</a></li>
+                        <li><a href="" class="text-light">Hospedaje en Magdalena del Mar</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -58,9 +125,45 @@
     <script src="{% static 'js/popper.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+        integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
+        integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+
+    <script>
+        flatpickr("#dateRangePicker", {
+
+            mode: "range", // Activar selección de rango
+            dateFormat: "Y-m-d", // Formato de las fechas
+            minDate: "today", // No permitir fechas pasadas
+            showMonths: 2, // Mostrar dos calendarios a la vez
+            locale: {
+                firstDayOfWeek: 1, // Configurar que la semana comience en lunes
+            }
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.multiple-items').slick({
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                dots: true,
+                autoplay: true,
+                centerMode: true,
+                autoplaySpeed: 5000,
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -36,5 +36,107 @@
         <img src="https://placehold.co/600x400" class="card-img-top" alt="...">
     </div>
 </div>
+<div class="row pt-3 mt-3 mb-4">
+    <div class="col-7">
+        <div id="calendar-inline"></div>
+    </div>
+    <div class="col-5 d-flex align-items-center">
+        <div class="calendar-input-date w-100">
+            <input type="hidden" id="habitacion-id" value="{{ alojamiento.id }}">
+            <input type="hidden" id="precio_habitacion_id" value="{{ alojamiento.price_night }}">
+            <label for="">Check-in Date *</label>
+            <input class="form-control" id="checkin-date" placeholder="check-in Date"></input>
+            <br>
+            <label for="">Check-out Date *</label>
+            <input class="form-control" id="checkout-date" placeholder="check-out Date"></input>
+            <br>
+            <button class="btn btn-warning w-100 rounded-pill" onclick="validarReserva()">Confirmar Reserva</button>
+        </div>
+    </div>
+</div>
+<script>
+    let checkInDate = null;
+    let checkOutDate = null;
+    const diasOcupados = {{ dias_ocupados_json| safe }};
+    const habitacionId = document.getElementById("habitacion-id").value;
+    const precio =  document.getElementById("precio_habitacion_id").value;
+
+
+    const today = new Date();
+
+    // Configuración del calendario en línea
+    const inlineCalendar = flatpickr("#calendar-inline", {
+        inline: true,
+        mode: "range",
+        showMonths: 2,
+        dateFormat: "d-m-Y",
+        disable: diasOcupados.map(d => new Date(d).getTime()), // Deshabilitar fechas ocupadas
+        minDate: today,// Deshabilitar fechas ocupadas
+        onChange: function (selectedDates) {
+            if (selectedDates.length === 2) {
+                checkInDate = selectedDates[0];
+                checkOutDate = selectedDates[1];
+                checkinInput.setDate(checkInDate);
+                checkoutInput.setDate(checkOutDate);
+            }
+        }
+    });
+    // Configuración de los inputs de fecha
+    const checkinInput = flatpickr("#checkin-date", {
+        dateFormat: "d-m-Y",
+        minDate: today,
+        disable: diasOcupados.map(d => new Date(d).getTime()),
+        onChange: function (selectedDates) {
+            if (selectedDates.length === 1) {
+                checkInDate = selectedDates[0];
+                if (checkOutDate) {
+                    inlineCalendar.setDate([checkInDate, checkOutDate], true);
+                }
+            }
+        }
+    });
+
+    const checkoutInput = flatpickr("#checkout-date", {
+        dateFormat: "d-m-Y",
+        minDate: today,
+        disable: diasOcupados.map(d => new Date(d).getTime()),
+        onChange: function (selectedDates) {
+            if (selectedDates.length === 1) {
+                checkOutDate = selectedDates[0];
+                if (checkInDate) {
+                    inlineCalendar.setDate([checkInDate, checkOutDate], true);
+                }
+            }
+        }
+    });
+</script>
+
+<script>
+    function validarReserva() {
+        // Validar que se hayan seleccionado fechas
+        if (!checkInDate || !checkOutDate) {
+            alert("Por favor selecciona las fechas de check-in y check-out.");
+            return;
+        }
+
+        // Comprobar disponibilidad
+        const isAvailable = diasOcupados.every(date => {
+            const disabledDate = new Date(date);
+            return (
+                checkInDate > disabledDate || checkOutDate < disabledDate
+            );
+        })
+
+        if (!isAvailable) {
+            alert("Las fechas seleccionadas no están disponibles. Por favor, elige otras fechas.");
+            return;
+        }
+
+        const reservaUrl = `/reservar-add/?checkin=${checkInDate.toISOString().split('T')[0]}&checkout=${checkOutDate.toISOString().split('T')[0]}&habitacion=${habitacionId}&price=${precio}`;
+        window.location.href = reservaUrl;
+    }
+
+
+</script>
 {% endblock %}
 {% block content-pp %} {% endblock %}
